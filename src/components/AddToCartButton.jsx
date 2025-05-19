@@ -12,10 +12,11 @@ const AddToCartButton = ({ data }) => {
     const { fetchCartItem, updateCartItem, deleteCartItem } = useGlobalContext()
     const [loading, setLoading] = useState(false)
     const cartItem = useSelector(state => state.cartItem.cart)
+    const userId = localStorage.getItem("userId")
     const [isAvailableCart, setIsAvailableCart] = useState(false)
     const [qty, setQty] = useState(0)
-    const [cartItemDetails,setCartItemsDetails] = useState()
-
+    const [cartItemDetails, setCartItemsDetails] = useState()
+    console.log("userId", userId)
     const handleADDTocart = async (e) => {
         e.preventDefault()
         e.stopPropagation()
@@ -26,13 +27,12 @@ const AddToCartButton = ({ data }) => {
             const response = await Axios({
                 ...SummaryApi.addTocart,
                 data: {
-                    productId: data?._id
+                    productId: data?._id,
+                    userId: userId,
                 }
             })
-
             const { data: responseData } = response
-
-            if (responseData.success) {
+            if (responseData) {
                 toast.success(responseData.message)
                 if (fetchCartItem) {
                     fetchCartItem()
@@ -57,26 +57,26 @@ const AddToCartButton = ({ data }) => {
     }, [data, cartItem])
 
 
-    const increaseQty = async(e) => {
+    const increaseQty = async (e) => {
         e.preventDefault()
         e.stopPropagation()
-    
-       const response = await  updateCartItem(cartItemDetails?._id,qty+1)
-        
-       if(response.success){
-        toast.success("Item added")
-       }
+
+        const response = await updateCartItem(cartItemDetails?._id, qty + 1)
+
+        if (response.success) {
+            toast.success("Item added")
+        }
     }
 
-    const decreaseQty = async(e) => {
+    const decreaseQty = async (e) => {
         e.preventDefault()
         e.stopPropagation()
-        if(qty === 1){
+        if (qty === 1) {
             deleteCartItem(cartItemDetails?._id)
-        }else{
-            const response = await updateCartItem(cartItemDetails?._id,qty-1)
+        } else {
+            const response = await updateCartItem(cartItemDetails?._id, qty - 1)
 
-            if(response.success){
+            if (response.success) {
                 toast.success("Item remove")
             }
         }

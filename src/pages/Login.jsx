@@ -64,6 +64,7 @@ const Login = () => {
                 role: response.data.data.userType || "",
             };
             localStorage.setItem("userInfo", JSON.stringify(userData));
+            localStorage.setItem("userId", userData?._id);
             dispatch(setUserDetails(userData));
             setData({ phone: "", password: "" });
             navigate("/");

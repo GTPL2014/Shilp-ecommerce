@@ -16,11 +16,8 @@ const Home = () => {
   const subCategoryData = useSelector(state => state.product.allSubCategory)
   const TokenAuth = useSelector(state => state.user.token)
   const setUserDetails = useSelector(state => state.user._id)
-  console.log("setUserDetails:-", setUserDetails)
   const navigate = useNavigate()
-  console.log("productData:-", productData)
   const handleRedirectProductListpage = (id, cat) => {
-    console.log(id, cat)
     const subcategory = subCategoryData.find(sub => {
       const filterData = sub.category.some(c => {
         return c._id == id
@@ -40,8 +37,6 @@ const Home = () => {
         ...SummaryApi.getProduct
       })
       const { data: responseData } = response
-
-      console.log("product page ", responseData)
       if (responseData) {
         setProductData(responseData)
       }
@@ -51,7 +46,6 @@ const Home = () => {
     }
   }
 
-  console.log("product page")
   useEffect(() => {
     fetchProductData()
   }, [])
@@ -110,17 +104,13 @@ const Home = () => {
       </div>
 
       {/* Category-wise Product Display */}
-      {
-        productData?.map((c) => (
-          <CategoryWiseProductDisplay
-            key={c?._id}
-            id={c?._id}
-            name={c?.name}
-            AllProduct={productData}
-          />
-        ))
-      }
-    </section>
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-1 px-2">
+        {productData?.map((c) => (
+          <CategoryWiseProductDisplay key={c?._id} data={c} />
+        ))}
+      </div>
+
+    </section >
 
   )
 }

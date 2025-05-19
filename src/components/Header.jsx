@@ -22,7 +22,6 @@ const Header = () => {
     const navigate = useNavigate()
     const user = useSelector((state) => state?.user)
     const token = useSelector((state) => state?.user?.token)
-    console.log("user", user)
     const [openUserMenu, setOpenUserMenu] = useState(false)
     const cartItem = useSelector(state => state.cartItem.cart)
     // const [totalPrice,setTotalPrice] = useState(0)
@@ -49,7 +48,6 @@ const Header = () => {
     useEffect(() => {
         const token = localStorage.getItem("token");
         const userInfo = localStorage.getItem("userInfo");
-        console.log("userInfo", userInfo)
         if (token) {
             dispatch(SET_TOKEN(token));
         }

@@ -20,7 +20,6 @@ function App() {
   const dispatch = useDispatch()
   const location = useLocation()
   useEffect(() => {
-    console.log("userInfo", userInfo)
     if (token) {
       dispatch(SET_TOKEN(token));
     }
@@ -41,7 +40,6 @@ function App() {
         ...SummaryApi.getCategory
       })
       const { data: responseData } = response
-      console.log("responseData", responseData)
       if (responseData) {
         dispatch(setAllCategory(responseData))
       }
