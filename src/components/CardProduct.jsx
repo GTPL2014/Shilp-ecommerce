@@ -5,7 +5,7 @@ import { valideURLConvert } from '../utils/valideURLConvert'
 import AddToCartButton from './AddToCartButton'
 
 const CardProduct = ({ data }) => {
-  const url = `/product/${valideURLConvert(data.name)}-${data._id}`
+  const url = `/product/${data._id}`
   const [loading, setLoading] = useState(false)
   return (
     <Link

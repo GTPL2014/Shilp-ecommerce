@@ -44,10 +44,10 @@ const DisplayCartItem = ({close}) => {
                 {
                     cartItem ? (
                         <>
-                            <div className='flex items-center justify-between px-4 py-2 bg-blue-100 text-blue-500 rounded-full'>
+                            {/* <div className='flex items-center justify-between px-4 py-2 bg-blue-100 text-blue-500 rounded-full'>
                                     <p>Your total savings</p>
                                     <p>{DisplayPriceInRupees(notDiscountTotalPrice - totalPrice )}</p>
-                            </div>
+                            </div> */}
                             <div className='bg-white rounded-lg p-4 grid gap-5 overflow-auto'>
                                     {
                                         cartItem && (
