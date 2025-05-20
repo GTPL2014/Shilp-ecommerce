@@ -15,10 +15,7 @@ import AddToCartButton from '../components/AddToCartButton'
 const ProductDisplayPage = () => {
   const params = useParams()
   let productId = params?.id
-  const [data, setData] = useState({
-    name: "",
-    image: []
-  })
+  const [data, setData] = useState({})
   const [image, setImage] = useState(0)
   const [loading, setLoading] = useState(false)
   const imageContainer = useRef()
@@ -31,12 +28,12 @@ const ProductDisplayPage = () => {
         const ApiUrl = `${SummaryApi.getProduct.url}/${productId}`
         console.log("ApiUrl", ApiUrl)
         const response = await Axios({
-          ApiUrl,
+          url: ApiUrl
         })
         console.log("productId called", productId)
         const { data: responseData } = response
         if (responseData) {
-          setData(responseData.data)
+          setData(responseData)
         }
       } catch (error) {
         AxiosToastError(error)
@@ -57,58 +54,35 @@ const ProductDisplayPage = () => {
   return (
     <section className='container mx-auto p-4 grid lg:grid-cols-2 '>
       <div className=''>
-        <div className='bg-white lg:min-h-[65vh] lg:max-h-[65vh] rounded min-h-56 max-h-56 h-full w-full'>
+        <div className='bg-white lg:min-h-[80vh] lg:max-h-[65vh] rounded min-h-56 max-h-56 h-full w-full'>
           <img
-            src={data.image[image]}
+            src={data?.image}
             className='w-full h-full object-scale-down'
           />
         </div>
-        <div className='flex items-center justify-center gap-3 my-2'>
-          {
-            data.image.map((img, index) => {
-              return (
-                <div key={img + index + "point"} className={`bg-slate-200 w-3 h-3 lg:w-5 lg:h-5 rounded-full ${index === image && "bg-slate-300"}`}></div>
-              )
-            })
-          }
-        </div>
-        <div className='grid relative'>
-          <div ref={imageContainer} className='flex gap-4 z-10 relative w-full overflow-x-auto scrollbar-none'>
-            {
-              data.image.map((img, index) => {
-                return (
-                  <div className='w-20 h-20 min-h-20 min-w-20 scr cursor-pointer shadow-md' key={img + index}>
-                    <img
-                      src={img}
-                      alt='min-product'
-                      onClick={() => setImage(index)}
-                      className='w-full h-full object-scale-down'
-                    />
-                  </div>
-                )
-              })
-            }
-          </div>
-          <div className='w-full -ml-3 h-full hidden lg:flex justify-between absolute  items-center'>
-            <button onClick={handleScrollLeft} className='z-10 bg-white relative p-1 rounded-full shadow-lg'>
-              <FaAngleLeft />
-            </button>
-            <button onClick={handleScrollRight} className='z-10 bg-white relative p-1 rounded-full shadow-lg'>
-              <FaAngleRight />
-            </button>
-          </div>
-        </div>
         <div>
         </div>
-
         <div className='my-4  hidden lg:grid gap-3 '>
+          <h2 className='text-lg font-semibold lg:text-2xl'>Product Details</h2>
           <div>
             <p className='font-semibold'>Description</p>
-            <p className='text-base'>{data.description}</p>
+            <p className='text-base'>{data?.description}</p>
           </div>
           <div>
             <p className='font-semibold'>Unit</p>
-            <p className='text-base'>{data.unit}</p>
+            <p className='text-base'>{data?.unitQuantity} {data?.unit}</p>
+          </div>
+          <div>
+            <p className='font-semibold'>Country of Origin</p>
+            <p className='text-base'>India</p>
+          </div>
+          <div>
+            <p className='font-semibold'>Customer Care Details</p>
+            <p className='text-base'>Email: info@paridhansangrah.com</p>
+          </div><div>
+            <p className='font-semibold'>Disclaimer</p>
+            <p className='text-base'>Every effort is made to maintain accuracy of all information. However, actual product packaging and materials may contain more and/or different information. It is recommended not to solely rely on the information presented.
+            </p>
           </div>
           {
             data?.more_details && Object.keys(data?.more_details).map((element, index) => {
@@ -122,27 +96,25 @@ const ProductDisplayPage = () => {
           }
         </div>
       </div>
-
-
       <div className='p-4 lg:pl-7 text-base lg:text-lg'>
-        <p className='bg-green-300 w-fit px-2 rounded-full'>10 Min</p>
-        <h2 className='text-lg font-semibold lg:text-3xl'>{data.name}</h2>
-        <p className=''>{data.unit}</p>
+        {/* <p className='bg-green-300 w-fit px-2 rounded-full'>10 Min</p> */}
+        <h2 className='text-lg font-semibold lg:text-2xl'>{data?.name}</h2>
+        <p className=''>{data?.unitQuantity} {data?.unit}</p>
         <Divider />
         <div>
           <p className=''>Price</p>
           <div className='flex items-center gap-2 lg:gap-4'>
             <div className='border border-green-600 px-4 py-2 rounded bg-green-50 w-fit'>
-              <p className='font-semibold text-lg lg:text-xl'>{DisplayPriceInRupees(pricewithDiscount(data.price, data.discount))}</p>
+              <p className='font-semibold text-lg lg:text-xl'>{DisplayPriceInRupees(pricewithDiscount(data?.price, data?.discount))}</p>
             </div>
             {
-              data.discount && (
-                <p className='line-through'>{DisplayPriceInRupees(data.price)}</p>
+              data?.discount && (
+                <p className='line-through'>{DisplayPriceInRupees(data?.price)}</p>
               )
             }
             {
-              data.discount && (
-                <p className="font-bold text-green-600 lg:text-2xl">{data.discount}% <span className='text-base text-neutral-500'>Discount</span></p>
+              data?.discount && (
+                <p className="font-bold text-green-600 lg:text-2xl">{data?.discount}% <span className='text-base text-neutral-500'>Discount</span></p>
               )
             }
 
@@ -151,7 +123,7 @@ const ProductDisplayPage = () => {
         </div>
 
         {
-          data.stock === 0 ? (
+          data?.quantity === 0 ? (
             <p className='text-lg text-red-500 my-2'>Out of Stock</p>
           )
             : (
@@ -165,50 +137,51 @@ const ProductDisplayPage = () => {
 
         <h2 className='font-semibold'>Why shop from Paridhan Sangrah? </h2>
         <div>
-          <div className='flex  items-center gap-4 my-4'>
+          <div className='flex items-center gap-4 my-4'>
             <img
               src={image1}
-              alt='superfast delivery'
+              alt='Fast and Reliable Delivery'
               className='w-20 h-20'
             />
             <div className='text-sm'>
-              <div className='font-semibold'>Superfast Delivery</div>
-              <p>Get your orer delivered to your doorstep at the earliest from dark stores near you.</p>
+              <div className='font-semibold'>Fast & Reliable Delivery</div>
+              <p>Get your favorite fashion delivered to your doorstep quickly and safely.</p>
             </div>
           </div>
-          <div className='flex  items-center gap-4 my-4'>
+          <div className='flex items-center gap-4 my-4'>
             <img
               src={image2}
-              alt='Best prices offers'
+              alt='Best Prices & Exclusive Offers'
               className='w-20 h-20'
             />
             <div className='text-sm'>
-              <div className='font-semibold'>Best Prices & Offers</div>
-              <p>Best price destination with offers directly from the nanufacturers.</p>
+              <div className='font-semibold'>Best Prices & Exclusive Offers</div>
+              <p>Shop the latest trends at unbeatable prices with exciting discounts and deals.</p>
             </div>
           </div>
-          <div className='flex  items-center gap-4 my-4'>
+          <div className='flex items-center gap-4 my-4'>
             <img
               src={image3}
-              alt='Wide Assortment'
+              alt='Wide Range of Styles'
               className='w-20 h-20'
             />
             <div className='text-sm'>
-              <div className='font-semibold'>Wide Assortment</div>
-              <p>Choose from 5000+ products across food personal care, household & other categories.</p>
+              <div className='font-semibold'>Wide Range of Styles</div>
+              <p>Explore 5000+ fashion products across clothing, accessories, and more for every occasion.</p>
             </div>
           </div>
         </div>
+
 
         {/****only mobile */}
         <div className='my-4 grid gap-3 '>
           <div>
             <p className='font-semibold'>Description</p>
-            <p className='text-base'>{data.description}</p>
+            <p className='text-base'>{data?.description}</p>
           </div>
           <div>
             <p className='font-semibold'>Unit</p>
-            <p className='text-base'>{data.unit}</p>
+            <p className='text-base'>{data?.unitQuantity} {data?.unit}</p>
           </div>
           {
             data?.more_details && Object.keys(data?.more_details).map((element, index) => {
@@ -222,7 +195,7 @@ const ProductDisplayPage = () => {
           }
         </div>
       </div>
-    </section>
+    </section >
   )
 }
 

@@ -17,19 +17,11 @@ const Home = () => {
   const TokenAuth = useSelector(state => state.user.token)
   const setUserDetails = useSelector(state => state.user._id)
   const navigate = useNavigate()
-  const handleRedirectProductListpage = (id, cat) => {
-    const subcategory = subCategoryData.find(sub => {
-      const filterData = sub.category.some(c => {
-        return c._id == id
-      })
-
-      return filterData ? true : null
-    })
-    // const url = `/${valideURLConvert(cat)}-${id}/${valideURLConvert(subcategory.name)}-${subcategory._id}`
-    const url = ""
-    navigate(url)
-    console.log(url)
+  const handleRedirectProductListpage = (CategoryId, cat) => {
+    console.log("CategoryId--__", CategoryId)
+    navigate(`category/${CategoryId}`)
   }
+  console.log("categoryData", categoryData)
 
   const fetchProductData = async () => {
     try {

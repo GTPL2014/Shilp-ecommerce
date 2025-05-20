@@ -13,6 +13,7 @@ import Profile from "../pages/Profile";
 import MyOrders from "../pages/MyOrders";
 import Address from "../pages/Address";
 import CategoryPage from "../pages/CategoryPage";
+import ProductByCategory from "../pages/ProductByCategory";
 import SubCategoryPage from "../pages/SubCategoryPage";
 import UploadProduct from "../pages/UploadProduct";
 import ProductAdmin from "../pages/ProductAdmin";
@@ -26,103 +27,102 @@ import Cancel from "../pages/Cancel";
 
 const router = createBrowserRouter([
     {
-        path : "/",
-        element : <App/>,
-        children : [
+        path: "/",
+        element: <App />,
+        children: [
             {
-                path : "",
-                element : <Home/>
+                path: "",
+                element: <Home />
             },
             {
-                path : "search",
-                element : <SearchPage/>
+                path: "search",
+                element: <SearchPage />
             },
             {
-                path : 'login',
-                element : <Login/>
+                path: 'login',
+                element: <Login />
             },
             {
-                path : "register",
-                element : <Register/>
+                path: "register",
+                element: <Register />
             },
             {
-                path : "forgot-password",
-                element : <ForgotPassword/>
+                path: "forgot-password",
+                element: <ForgotPassword />
             },
             {
-                path : "verification-otp",
-                element : <OtpVerification/>
+                path: "verification-otp",
+                element: <OtpVerification />
             },
             {
-                path : "reset-password",
-                element : <ResetPassword/>
+                path: "reset-password",
+                element: <ResetPassword />
             },
             {
-                path : "user",
-                element : <UserMenuMobile/>
+                path: "user",
+                element: <UserMenuMobile />
             },
             {
-                path : "dashboard",
-                element : <Dashboard/>,
-                children : [
+                path: "dashboard",
+                element: <Dashboard />,
+                children: [
                     {
-                        path : "profile",
-                        element : <Profile/>
+                        path: "profile",
+                        element: <Profile />
                     },
                     {
-                        path : "myorders",
-                        element : <MyOrders/>
+                        path: "myorders",
+                        element: <MyOrders />
                     },
                     {
-                        path : "address",
-                        element : <Address/>
+                        path: "address",
+                        element: <Address />
                     },
                     {
-                        path : 'category',
-                        element : <AdminPermision><CategoryPage/></AdminPermision>
+                        path: 'category',
+                        element: <AdminPermision><CategoryPage /></AdminPermision>
                     },
                     {
-                        path : "subcategory",
-                        element : <AdminPermision><SubCategoryPage/></AdminPermision>
+                        path: "subcategory",
+                        element: <AdminPermision><SubCategoryPage /></AdminPermision>
                     },
                     {
-                        path : 'upload-product',
-                        element : <AdminPermision><UploadProduct/></AdminPermision>
+                        path: 'upload-product',
+                        element: <AdminPermision><UploadProduct /></AdminPermision>
                     },
                     {
-                        path : 'product',
-                        element : <AdminPermision><ProductAdmin/></AdminPermision>
+                        path: 'product',
+                        element: <AdminPermision><ProductAdmin /></AdminPermision>
                     }
                 ]
             },
             {
-                path : ":category",
-                children : [
-                    {
-                        path : ":subCategory",
-                        element : <ProductListPage/>
-                    }
-                ]
+                path: "category/:CategoryId",
+                element: <ProductByCategory />
             },
             {
-                path : "product/:id",
-                element : <ProductDisplayPage/>
+                path: "subCategory/:subCategoryId",
+                element: <ProductListPage />
             },
             {
-                path : 'cart',
-                element : <CartMobile/>
+                path: "product/:id",
+                element: <ProductDisplayPage />
             },
             {
-                path : "checkout",
-                element : <CheckoutPage/>
+                path: 'cart',
+                element: <CartMobile />
             },
             {
-                path : "success",
-                element : <Success/>
+                path: "checkout",
+                element: <CheckoutPage />
             },
             {
-                path : 'cancel',
-                element : <Cancel/>
+                path: "success",
+                element: <Success />
+            },
+            {
+                path: 'cancel',
+                element: <Cancel />
             }
         ]
     }

@@ -66,8 +66,8 @@ const SummaryApi = {
         method: 'post'
     },
     getSubCategory: {
-        url: `/subcategoryproduct`,
-        method: 'post'
+        url: `/subcategoryproduct/categoryserviceid`,
+        method: 'get'
     },
     updateSubCategory: {
         url: `/subcategory/update`,
@@ -90,8 +90,8 @@ const SummaryApi = {
         method: 'post'
     },
     getProductByCategoryAndSubCategory: {
-        url: `/product/get-pruduct-by-category-and-subcategory`,
-        method: 'post'
+        url: `/products/get-product-by-subcategory`,
+        method: 'get'
     },
     getProductDetails: {
         url: `/product/get-product-details`,
