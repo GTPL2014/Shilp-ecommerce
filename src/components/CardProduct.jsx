@@ -5,7 +5,7 @@ import { valideURLConvert } from '../utils/valideURLConvert'
 import AddToCartButton from './AddToCartButton'
 
 const CardProduct = ({ data }) => {
-  const url = `/product/${data._id}`
+  const url = `/product/${data?._id}`
   const [loading, setLoading] = useState(false)
   return (
     <Link
@@ -15,8 +15,8 @@ const CardProduct = ({ data }) => {
       {/* Image */}
       <div className="flex items-center justify-center overflow-hidden">
         <img
-          src={data.image}
-          alt={data.name}
+          src={data?.image}
+          alt={data?.name}
           className="max-h-full max-w-full object-contain"
         />
       </div>
@@ -29,16 +29,16 @@ const CardProduct = ({ data }) => {
 
       {/* Name */}
       <div className="text-sm font-medium text-black mt-1 line-clamp-2 text-xs leading-tight">
-        {data.name}
+        {data?.name}
       </div>
 
       {/* Unit */}
-      <div className="text-xs text-gray-500 mt-1 mb-2">{data.unitQuantity} {data.unit}</div>
+      <div className="text-xs text-gray-500 mt-1 mb-2">{data?.unitQuantity} {data?.unit}</div>
 
       {/* Price + Add to Cart */}
       <div className="flex items-center text-xs justify-between pt-2" style={{ borderTop: '1px solid #e5e7eb', justifyContent: "space-between" }}>
-        <span className="text-xs">{DisplayPriceInRupees(data.price)}</span>
-        {data.stock === 0 ? (
+        <span className="text-xs">{DisplayPriceInRupees(data?.price)}</span>
+        {data?.quantity === 0 ? (
           <span className="text-red-500 text-xs">Out of stock</span>
         ) : (
           <AddToCartButton data={data} />
