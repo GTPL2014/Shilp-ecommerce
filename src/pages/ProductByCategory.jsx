@@ -1,16 +1,19 @@
-import React, { useEffect, useState } from 'react';
-import AxiosToastError from '../utils/AxiosToastError';
-import Axios from '../utils/Axios';
-import SummaryApi from '../common/SummaryApi';
-import { useNavigate, useParams } from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import AxiosToastError from "../utils/AxiosToastError";
+import Axios from "../utils/Axios";
+import SummaryApi from "../common/SummaryApi";
+import { useNavigate, useParams } from "react-router-dom";
+import { setAllSubCategory } from "../store/productSlice";
+import { useDispatch } from "react-redux";
 
 const SubCategoryPage = () => {
   const params = useParams();
+  const dispatch = useDispatch();
   const categoryId = params?.CategoryId;
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
-
+  // console.log("Hello")
   useEffect(() => {
     const fetchSubCategoryDetails = async () => {
       try {
@@ -19,6 +22,11 @@ const SubCategoryPage = () => {
         const response = await Axios({ url: ApiUrl });
         const { data: responseData } = response;
         if (responseData) {
+          dispatch(
+            setAllSubCategory(
+              responseData.sort((a, b) => a.name.localeCompare(b.name))
+            )
+          );
           setData(responseData);
         }
       } catch (error) {

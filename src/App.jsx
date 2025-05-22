@@ -71,7 +71,7 @@ function App() {
   useEffect(() => {
     fetchUser()
     fetchCategory()
-    fetchSubCategory()
+    // fetchSubCategory()
     // fetchCartItem()
   }, [token])
 

@@ -53,8 +53,8 @@ const Register = () => {
                 toast.error(response.data.message)
             }
 
-            if(response.data.success){
-                toast.success(response.data.message)
+            if(response?.data){
+                toast.success(response.message)
                 setData({
                     name : "",
                     email : "",

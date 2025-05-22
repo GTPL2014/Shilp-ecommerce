@@ -126,11 +126,11 @@ const SummaryApi = {
         method: 'delete'
     },
     createAddress: {
-        url: `/address/create`,
+        url: `/addresss`,
         method: 'post'
     },
     getAddress: {
-        url: `/address/get`,
+        url: `/addresss`,
         method: 'get'
     },
     updateAddress: {

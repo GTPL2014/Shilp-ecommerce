@@ -112,7 +112,7 @@ const GlobalProvider = ({ children }) => {
       })
       const { data: responseData } = response
 
-      if (responseData.success) {
+      if (responseData) {
         dispatch(handleAddAddress(responseData.data))
       }
     } catch (error) {
