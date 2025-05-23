@@ -15,9 +15,10 @@ const DisplayCartItem = ({close}) => {
     const cartItem  = useSelector(state => state.cartItem.cart)
     const user = useSelector(state => state.user)
     const navigate = useNavigate()
-    console.log("cartItem", cartItem)
+    const token = localStorage.getItem("token")
+    // console.log("token", token)
     const redirectToCheckoutPage = ()=>{
-        if(user?._id){
+        if(token){
             navigate("/checkout")
             if(close){
                 close()

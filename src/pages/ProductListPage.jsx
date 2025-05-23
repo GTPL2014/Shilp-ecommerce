@@ -22,7 +22,7 @@ const ProductListPage = () => {
   useEffect(() => {
     const fetchSubCategoryDetails = async () => {
       try {
-        setData("")
+        setData("");
         setLoading(true);
         const ApiUrl = `${SummaryApi.getProductByCategoryAndSubCategory.url}/${subCategoryId}`;
         const response = await Axios({
@@ -44,7 +44,7 @@ const ProductListPage = () => {
 
   return (
     <section className="sticky top-24 lg:top-20">
-      <div className="container sticky top-24  mx-auto grid grid-cols-[90px,1fr]  md:grid-cols-[200px,1fr] lg:grid-cols-[280px,1fr]">
+      <div className="container sticky top-24  mx-auto grid grid-cols-[50px,1fr]  md:grid-cols-[200px,1fr] lg:grid-cols-[280px,1fr]">
         {/**sub category **/}
         <div className=" min-h-[88vh] max-h-[88vh] overflow-y-scroll  grid gap-1 shadow-md scrollbarCustom bg-white py-2">
           {DisplaySubCatory.map((s, index) => {
@@ -78,7 +78,10 @@ const ProductListPage = () => {
           </div>
           <div>
             <div className="min-h-[80vh] max-h-[80vh] overflow-y-auto relative">
-              <div className=" grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 p-4 gap-4 ">
+              <div
+                className=" grid grid-cols-1 md:grid-cols-4 lg:grid-cols-5 p-4 gap-2 "
+                style={{ display: "flex", marginRight: 17 }}
+              >
                 {data?.data?.map((p, index) => {
                   return (
                     <CardProduct

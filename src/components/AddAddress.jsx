@@ -60,7 +60,7 @@ const AddAddress = ({ close }) => {
           city: data.city,
           state: data.state,
           country: data.country,
-          pincode: data.pincode,
+          zip: data.pincode,
           phone: data.mobile
         }
       })

@@ -122,7 +122,11 @@ const SummaryApi = {
         method: 'put'
     },
     deleteCartItem: {
-        url: `/cart/delete-cart-item`,
+        url: `/cart/reset-cart`,
+        method: 'delete'
+    },
+    resetCartItem: {
+        url: `/cart/reset-cart`,
         method: 'delete'
     },
     createAddress: {
@@ -134,15 +138,15 @@ const SummaryApi = {
         method: 'get'
     },
     updateAddress: {
-        url: `/address/update`,
+        url: `/addresss`,
         method: 'put'
     },
     disableAddress: {
-        url: `/address/disable`,
+        url: `/addresss`,
         method: 'delete'
     },
     CashOnDeliveryOrder: {
-        url: `/order/cash-on-delivery`,
+        url: `/orders/NewOrder`,
         method: 'post'
     },
     payment_url: {
@@ -150,7 +154,7 @@ const SummaryApi = {
         method: 'post'
     },
     getOrderItems: {
-        url: `/order/order-list`,
+        url: `/orders/OrdersByUser`,
         method: 'get'
     }
 };
