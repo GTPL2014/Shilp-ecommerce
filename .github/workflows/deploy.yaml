@@ -22,8 +22,7 @@ jobs:
 
       # Step 3: Set up environment variables for React
       - name: Set React Environment Variables
-        run: |
-          echo "VITE_API_URL=${{ secrets.VITE_API_URL }}" >> .env
+        #run: | echo "VITE_API_URL=${{ secrets.VITE_API_URL }}" >> .env
 
       # Step 4: Install dependencies
       - name: Install Dependencies
