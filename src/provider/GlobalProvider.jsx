@@ -166,11 +166,12 @@ const GlobalProvider = ({ children }) => {
 
 
   useEffect(() => {
+    if (!userId) return;
     fetchCartItem();
     handleLogoutOut();
     fetchAddress();
     fetchOrder();
-  }, [user]);
+  }, [userId]);
 
   return (
     <GlobalContext.Provider

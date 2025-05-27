@@ -11,6 +11,7 @@ import UserMenuMobile from "../pages/UserMenuMobile";
 import Dashboard from "../layouts/Dashboard";
 import Profile from "../pages/Profile";
 import MyOrders from "../pages/MyOrders";
+import OrderDetail from "../pages/OrderDetail";
 import Address from "../pages/Address";
 import CategoryPage from "../pages/CategoryPage";
 import ProductByCategory from "../pages/ProductByCategory";
@@ -73,6 +74,10 @@ const router = createBrowserRouter([
                     {
                         path: "myorders",
                         element: <MyOrders />
+                    },
+                    {
+                        path: "orderdetail/:id",
+                        element: <OrderDetail />
                     },
                     {
                         path: "address",
