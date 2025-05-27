@@ -45,7 +45,6 @@ const ProductListPage = () => {
   return (
     <section className="sticky top-24 lg:top-20">
       <div className="container sticky top-24  mx-auto grid grid-cols-[50px,1fr]  md:grid-cols-[200px,1fr] lg:grid-cols-[280px,1fr]">
-        {/**sub category **/}
         <div className=" min-h-[88vh] max-h-[88vh] overflow-y-scroll  grid gap-1 shadow-md scrollbarCustom bg-white py-2">
           {DisplaySubCatory.map((s, index) => {
             return (
@@ -70,7 +69,6 @@ const ProductListPage = () => {
             );
           })}
         </div>
-
         {/**Product **/}
         <div className="sticky top-20">
           <div className="bg-white shadow-md p-4 z-10">

@@ -38,7 +38,7 @@ const SummaryApi = {
         method: 'put'
     },
     updateUserDetails: {
-        url: `/user/update-user`,
+        url: `/auth/update-user`,
         method: 'put'
     },
     addCategory: {
@@ -106,7 +106,7 @@ const SummaryApi = {
         method: 'delete'
     },
     searchProduct: {
-        url: `/product/search-product`,
+        url: `/products/search`,
         method: 'post'
     },
     addTocart: {
