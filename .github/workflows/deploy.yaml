@@ -1,0 +1,50 @@
+name: Build and Deploy React App
+
+on:
+  push:
+    branches:
+      - main # Trigger this workflow on pushes to the main branch
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Checkout the code
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      # Step 2: Set up Node.js
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 22 # Use the required Node.js version
+
+      # Step 3: Set up environment variables for React
+      - name: Set React Environment Variables
+        run: |
+          echo "VITE_API_URL=${{ secrets.VITE_API_URL }}" >> .env
+
+      # Step 4: Install dependencies
+      - name: Install Dependencies
+        run: npm install
+
+      # Step 5: Build the React app
+      - name: Build the Project
+        run: npm run build
+
+      # Step 6: Deploy to the server using SSH private key
+      - name: Deploy to Server
+        env:
+          DEPLOY_SERVER: ${{ secrets.AWS_HOST }}
+          DEPLOY_USER: ${{ secrets.AWS_USER }}
+          SSH_PRIVATE_KEY: ${{ secrets.AWS_KEY }}
+        run: |
+          echo "Setting up SSH..."
+          mkdir -p ~/.ssh
+          echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan -H $DEPLOY_SERVER >> ~/.ssh/known_hosts
+
+          echo "Uploading build files to the server..."
+          scp -r ./build/* $DEPLOY_USER@$DEPLOY_SERVER:/var/www/paridhan-ecommerce/build
