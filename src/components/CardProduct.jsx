@@ -37,7 +37,7 @@ const CardProduct = ({ data }) => {
 
       {/* Price + Add to Cart */}
       <div className="flex items-center text-xs justify-between pt-2" style={{ borderTop: '1px solid #e5e7eb', justifyContent: "space-between" }}>
-        <span className="text-xs">{DisplayPriceInRupees(data?.price)}</span>
+        <span className="text-xs" style={{fontSize: "14px",fontWeight: "600"}}>{DisplayPriceInRupees(data?.price)}</span>
         {data?.quantity === 0 ? (
           <span className="text-red-500 text-xs">Out of stock</span>
         ) : (

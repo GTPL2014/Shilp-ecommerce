@@ -27,3 +27,11 @@ body{
 .scrollbarCustom::-webkit-scrollbar-thumb {
   @apply bg-blue-100 rounded-full;
 }
+/* Hide scrollbar across browsers */
+.scrollbar-hide {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;  /* IE 10+ */
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
