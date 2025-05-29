@@ -10,6 +10,7 @@ import noDataImage from "../assets/nothing here yet.webp";
 
 const SearchPage = () => {
   const [data, setData] = useState([]);
+  const [suggestions, setSuggestions] = useState([]);
   const [loading, setLoading] = useState(true);
   const loadingArrayCard = new Array(10).fill(null);
   const [page, setPage] = useState(1);
@@ -27,9 +28,7 @@ const SearchPage = () => {
           page: page,
         },
       });
-
       const { data: responseData } = response;
-
       if (responseData) {
         setData(responseData.results);
         console.log(responseData);
@@ -41,13 +40,13 @@ const SearchPage = () => {
     }
   };
 
-useEffect(() => {
-  const delayDebounce = setTimeout(() => {
-    fetchData();
-  }, 500); // 500ms debounce delay
+  useEffect(() => {
+    const delayDebounce = setTimeout(() => {
+      fetchData();
+    }, 500); // 500ms debounce delay
 
-  return () => clearTimeout(delayDebounce); // cleanup
-}, [searchText, page]);
+    return () => clearTimeout(delayDebounce); // cleanup
+  }, [searchText, page]);
   console.log("page", page);
 
   const handleFetchMore = () => {
