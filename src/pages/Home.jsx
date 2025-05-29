@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from "react";
 import banner from "../assets/banner.jpg";
+import seprator from "../assets/seprator.jpg";
 import bannerMobile from "../assets/banner-mobile.jpg";
 import SummaryApi from "../common/SummaryApi";
 import AxiosToastError from "../utils/AxiosToastError";
 import Axios from "../utils/Axios";
 import { useSelector } from "react-redux";
+import { TypeAnimation } from 'react-type-animation';
+import Footer from "./Footer";
 import { valideURLConvert } from "../utils/valideURLConvert";
 import { Link, useNavigate } from "react-router-dom";
 import CategoryWiseProductDisplay from "../components/CategoryWiseProductDisplay";
@@ -16,12 +19,41 @@ const Home = () => {
   const subCategoryData = useSelector((state) => state.product.allSubCategory);
   const TokenAuth = useSelector((state) => state.user.token);
   const setUserDetails = useSelector((state) => state.user._id);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [filteredCategories, setFilteredCategories] = useState(
+    categoryData || []
+  );
+  const [suggestions, setSuggestions] = useState([]);
   const navigate = useNavigate();
   const handleRedirectProductListpage = (CategoryId, cat) => {
     console.log("CategoryId--__", CategoryId);
     navigate(`category/${CategoryId}`);
   };
-  console.log("categoryData", categoryData);
+  useEffect(() => {
+    setFilteredCategories(categoryData);
+  }, [categoryData]);
+
+  const handleCategorySearch = (term) => {
+    setSearchTerm(term);
+    if (!term.trim()) {
+      setSuggestions([]);
+      setFilteredCategories(categoryData);
+      return;
+    }
+    const keyword = term.toLowerCase();
+    const filtered = categoryData.filter((cat) =>
+      cat.name.toLowerCase().includes(keyword)
+    );
+    setFilteredCategories(filtered);
+    const suggest = filtered.slice(0, 5); // limit suggestions to top 5 from filtered
+    setSuggestions(suggest);
+  };
+
+  const handleSuggestionClick = (name) => {
+    setSearchTerm(name);
+    handleCategorySearch(name);
+    setSuggestions([]); // clear suggestions
+  };
 
   const fetchProductData = async () => {
     try {
@@ -62,36 +94,91 @@ const Home = () => {
           />
         </div>
       </div>
+      <div className="bg-white rounded-xl px-6 py-4 mx-4 my-6 shadow-sm hover:shadow-md hover:border-pink-200 transition-all duration-300 ease-in-out group">
+        <div className="flex flex-wrap justify-center items-center gap-6 text-sm font-medium text-gray-800">
+          {/* 1st Feature */}
+          <div className="flex items-center gap-2 group-hover:scale-105 group-hover:text-pink-500 transition-all duration-300">
+            <span className="text-pink-500 text-lg group-hover:scale-110 transition-transform">
+              📦
+            </span>
+            <span>7 Days Easy Return</span>
+          </div>
 
-      {/* Category Grid */}
-      <div className="container mx-auto px-4 my-4">
-        <div className="flex items-center justify-between">
-          <h2 className="text-lg font-semibold">Categories</h2>
+          {/* Divider */}
+          <div className="w-px h-5 bg-pink-100"></div>
 
-          {/* Animated Search Input */}
-          <div className="relative animate-fade-in-right">
-            <input
-              type="text"
-              placeholder="Search categories..."
-              className="pl-10 pr-4 py-2 w-64 rounded-full border border-gray-200 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-300 focus:border-transparent transition-all duration-300"
-              onChange={(e) => handleCategorySearch(e.target.value)}
-            />
-            <svg
-              className="w-5 h-5 absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 pointer-events-none"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M21 21l-4.35-4.35M17 11a6 6 0 11-12 0 6 6 0 0112 0z"
-              />
-            </svg>
+          {/* 2nd Feature */}
+          <div className="flex items-center gap-2 group-hover:scale-105 group-hover:text-pink-500 transition-all duration-300">
+            <span className="text-pink-500 text-lg group-hover:scale-110 transition-transform">
+              💰
+            </span>
+            <span>Cash on Delivery</span>
+          </div>
+
+          {/* Divider */}
+          <div className="w-px h-5 bg-pink-100"></div>
+
+          {/* 3rd Feature */}
+          <div className="flex items-center gap-2 group-hover:scale-105 group-hover:text-pink-500 transition-all duration-300">
+            <span className="text-pink-500 text-lg group-hover:scale-110 transition-transform">
+              🛍️
+            </span>
+            <span>Lowest Prices</span>
           </div>
         </div>
       </div>
+      {/* Category Grid */}
+      <div className="container mx-auto px-4 my-4">
+        {/* Hoverable Row */}
+        <div className="flex items-center z-[9999] justify-between bg-white rounded-xl px-6 py-4 shadow-sm hover:shadow-md transition-shadow duration-500 ease-in-out">
+          {/* Animated Heading */}
+          <h2 className="text-lg font-semibold text-gray-800 transition-all duration-500 ease-in-out hover:text-pink-600 group-hover:text-xl">
+            Categories
+          </h2>
+
+          {/* Input container */}
+          <div className="relative">
+            <div className="w-[260px]">
+              <input
+                type="text"
+                value={searchTerm}
+                onChange={(e) => handleCategorySearch(e.target.value)}
+                placeholder="Search categories..."
+                className="pl-10 pr-4 py-2 w-full rounded-full border border-gray-200 shadow-md bg-white focus:outline-none focus:ring-2 focus:ring-pink-300 focus:border-transparent transition duration-300"
+              />
+              <svg
+                className="w-5 h-5 absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 pointer-events-none"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M21 21l-4.35-4.35M17 11a6 6 0 11-12 0 6 6 0 0112 0z"
+                />
+              </svg>
+            </div>
+
+            {/* Suggestion Dropdown */}
+            {suggestions.length > 0 && (
+              <ul className="absolute z-[9999] bg-white border border-pink-100 rounded-md mt-2 w-full shadow-xl max-h-60 overflow-y-auto">
+                {suggestions.map((sug, i) => (
+                  <li
+                    key={sug._id || i}
+                    className="px-4 py-2 text-sm text-gray-700 hover:bg-pink-50 cursor-pointer transition"
+                    onClick={() => handleSuggestionClick(sug.name)}
+                  >
+                    {sug.name}
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
+        </div>
+      </div>
+
       <div className="px-4 my-4 overflow-x-auto scrollbar-hide p-6">
         <div className="flex gap-4 w-max scrollbar-hide">
           {loadingCategory
@@ -104,7 +191,7 @@ const Home = () => {
                   <div className="bg-blue-100 h-4 w-20 rounded mt-2 animate-pulse"></div>
                 </div>
               ))
-            : categoryData.map((cat, index) => (
+            : filteredCategories?.map((cat, index) => (
                 <div
                   key={cat._id}
                   style={{
@@ -123,11 +210,11 @@ const Home = () => {
                     <img
                       src={cat.image}
                       alt={cat.name}
-                      className="w-full h-full object-cover transition-all duration-300 ease-out group-hover:scale-120 group-hover:brightness-140 relative z-10"
+                      className="w-full h-full object-cover transition-all duration-300 ease-out group-hover:scale-120 group-hover:brightness-140 relative"
                     />
 
                     {/* Hover overlay with subtle gradient */}
-                    <div className="absolute inset-0 rounded-full bg-gradient-to-t from-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-out z-20"></div>
+                    <div className="absolute inset-0 rounded-full bg-gradient-to-t from-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-out"></div>
                   </div>
 
                   <p className="text-center text-xs font-medium mt-2 leading-tight transition-all duration-300 ease-out group-hover:text-blue-600 group-hover:font-semibold group-hover:scale-105 group-hover:drop-shadow-sm">
@@ -138,6 +225,33 @@ const Home = () => {
                   <div className="w-0 h-0.5 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full transition-all duration-300 ease-out group-hover:w-16 mt-1"></div>
                 </div>
               ))}
+        </div>
+      </div>
+      <div className="container mx-auto relative">
+        {/* Banner */}
+        <div
+          style={{ height: "320px" }}
+          className={`w-full min-h-38 bg-blue-100 rounded overflow-hidden ${
+            !seprator && "animate-pulse my-2"
+          }`}
+        >
+          <img
+            src={seprator}
+            className="w-full h-full hidden lg:block object-cover rounded"
+            alt="separator"
+          />
+
+          {/* Shop Now Button */}
+          <div className="absolute bottom-6 left-6">
+            <button onClick={() => {navigate("/search")}} className="px-6 py-3 bg-gradient-to-r from-pink-500 to-yellow-500 text-white font-semibold text-lg rounded-full shadow-lg hover:scale-105 hover:shadow-xl transition-all duration-300 ease-in-out">
+            <TypeAnimation
+              sequence={['Shop Now', 1500,"Grab Deals",1500,"Explore More", 1000, 'Discover Deals', 1000]}
+              wrapper="span"
+              speed={50}
+              repeat={Infinity}
+            />
+            </button>
+          </div>
         </div>
       </div>
 
@@ -191,10 +305,10 @@ const Home = () => {
 
         /* Professional focus states for accessibility */
         .group:focus-within {
-          outline: 2px solid #3b82f6;
           outline-offset: 2px;
         }
       `}</style>
+      <Footer/>
     </section>
   );
 };

@@ -1,99 +1,148 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
 import { IoSearch } from "react-icons/io5";
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { TypeAnimation } from 'react-type-animation';
 import { FaArrowLeft } from "react-icons/fa";
 import useMobile from '../hooks/useMobile';
-
+import Axios from '../utils/Axios';
+import SummaryApi from '../common/SummaryApi';
+import AxiosToastError from '../utils/AxiosToastError';
 
 const Search = () => {
-    const navigate = useNavigate()
-    const location = useLocation()
-    const [isSearchPage,setIsSearchPage] = useState(false)
-    const [ isMobile ] = useMobile()
-    const params = useLocation()
-    const searchText = params.search.slice(3)
+  const navigate = useNavigate();
+  const location = useLocation();
+  const [isSearchPage, setIsSearchPage] = useState(false);
+  const [isMobile] = useMobile();
+  const params = useLocation();
+  const searchTextParam = decodeURIComponent(params.search?.slice(3) || "");
 
-    useEffect(()=>{
-        const isSearch = location.pathname === "/search"
-        setIsSearchPage(isSearch)
-    },[location])
+  const [searchText, setSearchText] = useState(searchTextParam);
+  const [suggestions, setSuggestions] = useState([]);
+  const [loading, setLoading] = useState(false);
 
+  // Detect if we are on the search page
+  useEffect(() => {
+    setIsSearchPage(location.pathname === "/search");
+  }, [location]);
 
-    const redirectToSearchPage = ()=>{
-        navigate("/search")
+  // Debounced suggestion fetcher
+  useEffect(() => {
+    if (!isSearchPage || !searchText.trim()) {
+      setSuggestions([]);
+      return;
     }
 
-    const handleOnChange = (e)=>{
-        const value = e.target.value
-        const url = `/search?q=${value}`
-        navigate(url)
+    const delay = setTimeout(() => {
+      fetchSuggestions(searchText);
+    }, 200);
+
+    return () => clearTimeout(delay);
+  }, [searchText, isSearchPage]);
+
+  const fetchSuggestions = async (keyword) => {
+    try {
+      setLoading(true);
+      const response = await Axios({
+        ...SummaryApi.searchSuggestion,
+        data: { keyword },
+      });
+
+      const { data: responseData } = response;
+      if (responseData?.success) {
+        setSuggestions(responseData.suggestions || []);
+      }
+    } catch (error) {
+      AxiosToastError(error);
+    } finally {
+      setLoading(false);
     }
+  };
+
+  const handleSuggestionClick = (keyword) => {
+    navigate(`/search?q=${encodeURIComponent(keyword)}`);
+    setSearchText(keyword);
+    setSuggestions([]);
+  };
+
+  const handleOnChange = (e) => {
+    const value = e.target.value;
+    setSearchText(value);
+    navigate(`/search?q=${encodeURIComponent(value)}`);
+  };
+
+  const redirectToSearchPage = () => {
+    navigate("/search");
+  };
 
   return (
-    <div className='w-full  min-w-[300px] lg:min-w-[420px] h-11 lg:h-12 rounded-lg border overflow-hidden flex items-center text-neutral-500 bg-slate-50 group focus-within:border-primary-200 '>
+    <div className="relative w-full min-w-[300px] lg:min-w-[420px]">
+      <div className="h-11 lg:h-12 rounded-lg border overflow-hidden flex items-center text-neutral-500 bg-slate-50 group focus-within:border-primary-200">
         <div>
-            {
-                (isMobile && isSearchPage ) ? (
-                    <Link to={"/"} className='flex justify-center items-center h-full p-2 m-1 group-focus-within:text-primary-200 bg-white rounded-full shadow-md'>
-                        <FaArrowLeft size={20}/>
-                    </Link>
-                ) :(
-                    <button className='flex justify-center items-center h-full p-3 group-focus-within:text-primary-200'>
-                        <IoSearch size={22}/>
-                    </button>
-                )
-            }
+          {isMobile && isSearchPage ? (
+            <Link
+              to="/"
+              className="flex justify-center items-center h-full p-2 m-1 group-focus-within:text-primary-200 bg-white rounded-full shadow-md"
+            >
+              <FaArrowLeft size={20} />
+            </Link>
+          ) : (
+            <button className="flex justify-center items-center h-full p-3 group-focus-within:text-primary-200">
+              <IoSearch size={22} />
+            </button>
+          )}
         </div>
-        <div className='w-full h-full'>
-            {
-                !isSearchPage ? (
-                     //not in search page
-                     <div onClick={redirectToSearchPage} className='w-full h-full flex items-center'>
-                        <TypeAnimation
-                                sequence={[
-                                    // Same substring at the start will only be typed out once, initially
-                                    'Search "Women Ethnics"',
-                                    1000, // wait 1s before replacing "Mice" with "Hamsters"
-                                    'Search "Men Top Wear"',
-                                    1000,
-                                    'Search "Men Ethnic Wear"',
-                                    1000,
-                                    'Search "Women Sleepwear"',
-                                    1000,
-                                    'Search "Women Winter Wear Collection"',
-                                    1000,
-                                    'Search "Men Inner & Sleep Wear"',
-                                    1000,
-                                    'Search "Kids Ethnics"',
-                                    1000,
-                                    'Search "Kid Rompers"',
-                                    1000,
-                                    'Search "Women Lehengas"',
-                                ]}
-                                wrapper="span"
-                                speed={50}
-                                repeat={Infinity}
-                            />
-                     </div>
-                ) : (
-                    //when i was search page
-                    <div className='w-full h-full'>
-                        <input
-                            type='text'
-                            placeholder='Search for Women, Men, Kids & More...'
-                            autoFocus
-                            defaultValue={searchText}
-                            className='bg-transparent w-full h-full outline-none'
-                            onChange={handleOnChange}
-                        />
-                    </div>
-                )
-            }
-        </div>
-        
-    </div>
-  )
-}
 
-export default Search
+        <div className="w-full h-full">
+          {!isSearchPage ? (
+            <div
+              onClick={redirectToSearchPage}
+              className="w-full h-full flex items-center cursor-text"
+            >
+              <TypeAnimation
+                sequence={[
+                  'Search "Women Ethnics"',
+                  1000,
+                  'Search "Men Top Wear"',
+                  1000,
+                  'Search "Women Sleepwear"',
+                  1000,
+                  'Search "Kid Rompers"',
+                  1000,
+                ]}
+                wrapper="span"
+                speed={50}
+                repeat={Infinity}
+              />
+            </div>
+          ) : (
+            <input
+              type="text"
+              placeholder="Search for Women, Men, Kids & More..."
+              autoFocus
+              className="bg-transparent w-full h-full outline-none px-2"
+              value={searchText}
+              onChange={handleOnChange}
+            />
+          )}
+        </div>
+      </div>
+
+      {/* Suggestion Dropdown */}
+      {isSearchPage && suggestions.length > 0 && (
+        <ul className="absolute z-[9999] bg-white border border-pink-100 rounded-md mt-1 w-full shadow-xl max-h-60 overflow-y-auto">
+          {suggestions.map((sug, i) => (
+            <li
+              key={sug._id || i}
+              className="px-4 py-2 text-sm text-gray-700 hover:bg-pink-50 cursor-pointer transition"
+              onClick={() => handleSuggestionClick(sug.name || sug)}
+            >
+              {sug.name || sug}
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
+  );
+};
+
+export default Search;

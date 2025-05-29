@@ -108,6 +108,10 @@ const SummaryApi = {
     searchProduct: {
         url: `/products/search`,
         method: 'post'
+    }, 
+    searchSuggestion: {
+        url: `/products/suggestions`,
+        method: 'post'
     },
     addTocart: {
         url: `/cart/create`,
