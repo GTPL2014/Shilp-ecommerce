@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { IoSearch } from "react-icons/io5";
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { TypeAnimation } from 'react-type-animation';
@@ -13,29 +13,48 @@ const Search = () => {
   const location = useLocation();
   const [isSearchPage, setIsSearchPage] = useState(false);
   const [isMobile] = useMobile();
-  const params = useLocation();
-  const searchTextParam = decodeURIComponent(params.search?.slice(3) || "");
+  const searchTextParam = decodeURIComponent(location.search?.slice(3) || "");
 
   const [searchText, setSearchText] = useState(searchTextParam);
   const [suggestions, setSuggestions] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  // Detect if we are on the search page
+  const wrapperRef = useRef(null);
+
   useEffect(() => {
     setIsSearchPage(location.pathname === "/search");
   }, [location]);
 
-  // Debounced suggestion fetcher
+  // Detect click outside to hide suggestions
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (wrapperRef.current && !wrapperRef.current.contains(e.target)) {
+        setSuggestions([]);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  // Hide suggestions on Enter key press
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === 'Enter') {
+        setSuggestions([]);
+      }
+    };
+    document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  }, []);
+
   useEffect(() => {
     if (!isSearchPage || !searchText.trim()) {
       setSuggestions([]);
       return;
     }
-
     const delay = setTimeout(() => {
       fetchSuggestions(searchText);
     }, 200);
-
     return () => clearTimeout(delay);
   }, [searchText, isSearchPage]);
 
@@ -46,7 +65,6 @@ const Search = () => {
         ...SummaryApi.searchSuggestion,
         data: { keyword },
       });
-
       const { data: responseData } = response;
       if (responseData?.success) {
         setSuggestions(responseData.suggestions || []);
@@ -75,7 +93,7 @@ const Search = () => {
   };
 
   return (
-    <div className="relative w-full min-w-[300px] lg:min-w-[420px]">
+    <div ref={wrapperRef} className="relative w-full min-w-[300px] lg:min-w-[420px]">
       <div className="h-11 lg:h-12 rounded-lg border overflow-hidden flex items-center text-neutral-500 bg-slate-50 group focus-within:border-primary-200">
         <div>
           {isMobile && isSearchPage ? (

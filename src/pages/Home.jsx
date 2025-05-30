@@ -75,7 +75,7 @@ const Home = () => {
 
   return (
     <section className="bg-white">
-      <div className="container mx-auto">
+      <div className="">
         {/* Banner */}
         <div
           className={`w-full h-full min-h-48 bg-blue-100 rounded ${
@@ -84,14 +84,14 @@ const Home = () => {
         >
           <img
             src={banner}
-            className="w-full h-full hidden lg:block object-cover rounded"
+            className="w-full h-full lg:block object-cover rounded"
             alt="banner"
           />
-          <img
+          {/* <img
             src={bannerMobile}
             className="w-full h-full lg:hidden object-cover rounded"
             alt="banner"
-          />
+          /> */}
         </div>
       </div>
       <div className="bg-white rounded-xl px-6 py-4 mx-4 my-6 shadow-sm hover:shadow-md hover:border-pink-200 transition-all duration-300 ease-in-out group">
@@ -128,7 +128,7 @@ const Home = () => {
         </div>
       </div>
       {/* Category Grid */}
-      <div className="container mx-auto px-4 my-4">
+      <div className="auto px-4 my-4">
         {/* Hoverable Row */}
         <div className="flex items-center z-[9999] justify-between bg-white rounded-xl px-6 py-4 shadow-sm hover:shadow-md transition-shadow duration-500 ease-in-out">
           {/* Animated Heading */}
@@ -227,7 +227,7 @@ const Home = () => {
               ))}
         </div>
       </div>
-      <div className="container mx-auto relative">
+      <div className=" relative">
         {/* Banner */}
         <div
           style={{ height: "320px" }}
@@ -237,7 +237,7 @@ const Home = () => {
         >
           <img
             src={seprator}
-            className="w-full h-full hidden lg:block object-cover rounded"
+            className="w-full h-full lg:block object-cover rounded"
             alt="separator"
           />
 
@@ -256,7 +256,7 @@ const Home = () => {
       </div>
 
       {/* Category-wise Product Display */}
-      <div className="container mx-auto px-4 my-4">
+      <div className=" px-4 my-4">
         <h2 className="text-lg font-semibold mb-4 animate-fade-in-down">
           Products
         </h2>

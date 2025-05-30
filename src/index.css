@@ -35,3 +35,6 @@ body{
 .scrollbar-hide::-webkit-scrollbar {
   display: none; /* Chrome, Safari, Opera */
 }
+.container{
+  max-width: auto !important;
+}
