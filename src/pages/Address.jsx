@@ -16,7 +16,7 @@ const Address = () => {
   const [OpenEdit, setOpenEdit] = useState(false);
   const [editData, setEditData] = useState({});
   const { fetchAddress } = useGlobalContext();
-  console.log("setEditData", setEditData);
+  // console.log("addressList", addressList);
   const handleDisableAddress = async (id) => {
     try {
       const response = await Axios.delete(

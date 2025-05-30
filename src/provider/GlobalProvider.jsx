@@ -81,29 +81,28 @@ const GlobalProvider = ({ children }) => {
     }
   };
 
- const handleresetCartItem = async (userId) => {
-  try {
-    const response = await Axios({
-      method: 'delete',
-      url: `${SummaryApi.resetCartItem.url}`,
-      data: {
-        userId: userId, // ✅ pass in headers
-      },
-    });
+  const handleresetCartItem = async (userId) => {
+    try {
+      const response = await Axios({
+        method: "delete",
+        url: `${SummaryApi.resetCartItem.url}`,
+        data: {
+          userId: userId, // ✅ pass in headers
+        },
+      });
 
-    const { data: responseData } = response;
+      const { data: responseData } = response;
 
-    if (responseData.success) {
-      // toast.success(responseData.message || "Cart has been reset");
-      fetchCartItem(); // Refresh cart items
-    } else {
-      toast.error(responseData.message || "Failed to reset cart");
+      if (responseData.success) {
+        // toast.success(responseData.message || "Cart has been reset");
+        fetchCartItem(); // Refresh cart items
+      } else {
+        toast.error(responseData.message || "Failed to reset cart");
+      }
+    } catch (error) {
+      AxiosToastError(error);
     }
-  } catch (error) {
-    AxiosToastError(error);
-  }
-};
-
+  };
 
   useEffect(() => {
     const qty = cartItem.reduce((preve, curr) => {
@@ -134,36 +133,35 @@ const GlobalProvider = ({ children }) => {
   const fetchAddress = async () => {
     try {
       const response = await Axios({
-        ...SummaryApi.getAddress,
+        url: `${SummaryApi.getAddressbyUserId.url}/${userId}`,
       });
       const { data: responseData } = response;
       // console.log("responseData",responseData)
-      if (responseData) {
-        dispatch(handleAddAddress(responseData));
+      if (responseData.success) {
+        dispatch(handleAddAddress(responseData.data));
       }
     } catch (error) {
       // AxiosToastError(error)
     }
   };
- const fetchOrder = async () => {
-  try {
-    const response = await Axios({
-      method: 'get',
-      url: `${SummaryApi.getOrderItems.url}/${userId}`,
-    });
+  const fetchOrder = async () => {
+    try {
+      const response = await Axios({
+        method: "get",
+        url: `${SummaryApi.getOrderItems.url}/${userId}`,
+      });
 
-    const { data: responseData } = response;
+      const { data: responseData } = response;
 
-    if (responseData) {
-      dispatch(setOrder(responseData));
-    } else {
-      console.error('Failed to fetch orders:', responseData.message);
+      if (responseData) {
+        dispatch(setOrder(responseData));
+      } else {
+        console.error("Failed to fetch orders:", responseData.message);
+      }
+    } catch (error) {
+      console.error("Error while fetching orders:", error);
     }
-  } catch (error) {
-    console.error('Error while fetching orders:', error);
-  }
-};
-
+  };
 
   useEffect(() => {
     if (!userId) return;

@@ -141,6 +141,10 @@ const SummaryApi = {
         url: `/addresss`,
         method: 'get'
     },
+    getAddressbyUserId: {
+        url: `/addresss/user`,
+        method: 'get'
+    },
     updateAddress: {
         url: `/addresss`,
         method: 'put'
