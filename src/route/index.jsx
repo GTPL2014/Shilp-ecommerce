@@ -12,6 +12,10 @@ import Dashboard from "../layouts/Dashboard";
 import Profile from "../pages/Profile";
 import MyOrders from "../pages/MyOrders";
 import OrderDetail from "../pages/OrderDetail";
+import Career from "../pages/Careers";
+import BecomeASeller from "../pages/BecomeASeller";
+import ReturnsAndExchanges  from "../pages/ReturnsAndExchanges"; 
+import ShippingAndDelivery  from "../pages/ShippingAndDelivery"; 
 import Address from "../pages/Address";
 import CategoryPage from "../pages/CategoryPage";
 import ProductByCategory from "../pages/ProductByCategory";
@@ -54,6 +58,21 @@ const router = createBrowserRouter([
             {
                 path: "verification-otp",
                 element: <OtpVerification />
+            },
+            {
+                path: "returns-exchanges",
+                element: <ReturnsAndExchanges />
+            },
+            {
+                path: "shipping-and-delivery",
+                element: <ShippingAndDelivery />
+            },
+             {
+                path: "careers",
+                element: <Career />
+            }, {
+                path: "become-a-seller",
+                element: <BecomeASeller />
             },
             {
                 path: "reset-password",
