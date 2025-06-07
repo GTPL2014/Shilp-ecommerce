@@ -19,7 +19,7 @@ const MyOrders = () => {
         orders.map((order, index) => {
           let address = {};
           try {
-            address = JSON.parse(order?.shippingAddress || "{}");
+            address = JSON.parse(order?.shippingAddress.name || "{}");
           } catch (err) {
             console.error("Invalid shippingAddress JSON:", err);
           }
