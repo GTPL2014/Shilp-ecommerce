@@ -6,11 +6,14 @@ import SummaryApi from "../common/SummaryApi";
 import AxiosToastError from "../utils/AxiosToastError";
 import Axios from "../utils/Axios";
 import { useSelector } from "react-redux";
-import { TypeAnimation } from 'react-type-animation';
+import { TypeAnimation } from "react-type-animation";
 import Footer from "./Footer";
 import { valideURLConvert } from "../utils/valideURLConvert";
 import { Link, useNavigate } from "react-router-dom";
 import CategoryWiseProductDisplay from "../components/CategoryWiseProductDisplay";
+import googleplayimage from "../assets/img-google-play.png";
+import appstoreimage from "../assets/img-app-store.png";
+import logo from "../assets/main-logo.png";
 
 const Home = () => {
   const [productData, setProductData] = useState([]);
@@ -243,13 +246,27 @@ const Home = () => {
 
           {/* Shop Now Button */}
           <div className="absolute bottom-6 left-6">
-            <button onClick={() => {navigate("/search")}} className="px-6 py-3 bg-gradient-to-r from-pink-500 to-yellow-500 text-white font-semibold text-lg rounded-full shadow-lg hover:scale-105 hover:shadow-xl transition-all duration-300 ease-in-out">
-            <TypeAnimation
-              sequence={['Shop Now', 1500,"Grab Deals",1500,"Explore More", 1000, 'Discover Deals', 1000]}
-              wrapper="span"
-              speed={50}
-              repeat={Infinity}
-            />
+            <button
+              onClick={() => {
+                navigate("/search");
+              }}
+              className="px-6 py-3 bg-gradient-to-r from-pink-500 to-yellow-500 text-white font-semibold text-lg rounded-full shadow-lg hover:scale-105 hover:shadow-xl transition-all duration-300 ease-in-out"
+            >
+              <TypeAnimation
+                sequence={[
+                  "Shop Now",
+                  1500,
+                  "Grab Deals",
+                  1500,
+                  "Explore More",
+                  1000,
+                  "Discover Deals",
+                  1000,
+                ]}
+                wrapper="span"
+                speed={50}
+                repeat={Infinity}
+              />
             </button>
           </div>
         </div>
@@ -281,7 +298,120 @@ const Home = () => {
           </div>
         ))}
       </div>
+      <section className="p-6 pt-2 my-3">
+        <div className="container">
+          <div className="row justify-content-center">
+            <div className="col-12">
+              <div
+                className="position-relative overflow-hidden"
+                style={{
+                  background:
+                    "linear-gradient(135deg, #fef3c7 0%, #fde68a 50%, #fbbf24 100%)",
+                  borderRadius: "16px",
+                  padding: "25px 20px",
+                  boxShadow: "0 8px 20px rgba(251, 191, 36, 0.1)",
+                  border: "1px solid rgba(251, 191, 36, 0.2)",
+                }}
+              >
+                {/* Background decorative elements */}
+                <div
+                  className="position-absolute"
+                  style={{
+                    top: "-20px",
+                    right: "-20px",
+                    width: "60px",
+                    height: "40px",
+                    background: "rgba(255, 255, 255, 0.1)",
+                    borderRadius: "50%",
+                    filter: "blur(20px)",
+                  }}
+                />
 
+                <div onclick={navigate("https://play.google.com/store/apps/details?id=com.swabhiman&hl=en")} className="row align-items-center">
+                  {/* Left Content */}
+                  <div className="col-lg-8 col-md-7 mb-2 mb-md-0">
+                    <div className="d-flex align-items-center">
+                      {/* Badge */}
+                      <span
+                        className="badge px-2 py-1 me-3 mb-4"
+                        style={{
+                          background: "rgba(255, 255, 255, 0.9)",
+                          color: "#d97706",
+                          fontSize: "18px",
+                          fontWeight: "600",
+                          borderRadius: "12px",
+                        }}
+                      >
+                        📱 App
+                      </span>
+
+                      {/* Main Content */}
+                      <div className="flex-grow-1">
+                        <h5
+                          className="mb-1"
+                          style={{
+                            fontSize: "1.1rem",
+                            fontWeight: "700",
+                            color: "#1f2937",
+                            marginTop:20
+                          }}
+                        >
+                          Download{" "}
+                          <span style={{ color: "#d97706" }}>
+                            Paridhan Sangrah
+                          </span>{" "}
+                          App
+                        </h5>
+                        <p
+                          className="mb-0"
+                          style={{
+                            fontSize: "0.85rem",
+                            color: "#4b5563",
+                             marginTop:10
+                          }}
+                        >
+                          Online Orders made easy, fast and reliable
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="flex gap-4" style={{ marginTop:30}}>
+                    <img
+                      src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg"
+                      alt="Google Play"
+                      className="h-12 w-auto"
+                    />
+                    <img
+                      src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg"
+                      alt="App Store"
+                      className="h-12 w-auto"
+                    />
+                  </div>
+                </div>
+                {/* <div>
+                   <img
+                      src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg"
+                      alt="App Store"
+                      className="h-12 w-auto"
+                    />
+                </div> */}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <style jsx>{`
+          @keyframes float {
+            0%,
+            100% {
+              transform: translateY(0px);
+            }
+            50% {
+              transform: translateY(-5px);
+            }
+          }
+        `}</style>
+      </section>
       <style jsx>{`
         @keyframes fade-in-up {
           0% {
@@ -308,7 +438,7 @@ const Home = () => {
           outline-offset: 2px;
         }
       `}</style>
-      <Footer/>
+      <Footer />
     </section>
   );
 };
