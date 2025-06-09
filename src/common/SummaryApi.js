@@ -126,7 +126,7 @@ const SummaryApi = {
         method: 'put'
     },
     deleteCartItem: {
-        url: `/cart/reset-cart`,
+        url: `/cart/delete-cart-item`,
         method: 'delete'
     },
     resetCartItem: {

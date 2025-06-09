@@ -29,6 +29,7 @@ const CheckoutPage = () => {
     try {
       const formattedItems = cartItemsList.map((item) => ({
         quantity: item.quantity,
+        size: item.size,
         price: item.productId?.price || 0,
         name: item.productId?.name || "Unknown",
         _id: item.productId?._id || item._id,
