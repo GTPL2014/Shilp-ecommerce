@@ -327,7 +327,7 @@ const Home = () => {
                   }}
                 />
 
-                <div onclick={navigate("https://play.google.com/store/apps/details?id=com.swabhiman&hl=en")} className="row align-items-center">
+                <div  style={{ cursor: 'pointer' }}  onClick={() => window.open("https://play.google.com/store/apps/details?id=com.swabhiman&hl=en", "_blank")} className="row align-items-center">
                   {/* Left Content */}
                   <div className="col-lg-8 col-md-7 mb-2 mb-md-0">
                     <div className="d-flex align-items-center">
@@ -350,7 +350,7 @@ const Home = () => {
                         <h5
                           className="mb-1"
                           style={{
-                            fontSize: "1.1rem",
+                            fontSize: "1.5rem",
                             fontWeight: "700",
                             color: "#1f2937",
                             marginTop:20
