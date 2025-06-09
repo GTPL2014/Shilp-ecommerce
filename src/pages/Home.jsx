@@ -299,9 +299,9 @@ const Home = () => {
         ))}
       </div>
       <section className="p-6 pt-2 my-3">
-        <div className="container">
+        <div className="">
           <div className="row justify-content-center">
-            <div className="col-12">
+            <div className="col-12" >
               <div
                 className="position-relative overflow-hidden"
                 style={{
@@ -311,6 +311,8 @@ const Home = () => {
                   padding: "25px 20px",
                   boxShadow: "0 8px 20px rgba(251, 191, 36, 0.1)",
                   border: "1px solid rgba(251, 191, 36, 0.2)",
+                  display:"flex",
+                  justifyContent:"center"
                 }}
               >
                 {/* Background decorative elements */}
@@ -388,13 +390,13 @@ const Home = () => {
                     />
                   </div>
                 </div>
-                {/* <div>
+                <div style={{marginLeft:40}}>
                    <img
-                      src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg"
+                      src={logo}
                       alt="App Store"
-                      className="h-12 w-auto"
+                      className="h-52 w-auto"
                     />
-                </div> */}
+                </div>
               </div>
             </div>
           </div>

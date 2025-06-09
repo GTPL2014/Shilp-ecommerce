@@ -15,18 +15,8 @@ const OrderDetailPage = () => {
     );
   }
 
-  let shipping = {};
-  try {
-    const fixedJSON = order.shippingAddress
-      ?.replace(/([a-zA-Z0-9_]+):/g, '"$1":') // Quote keys
-      .replace(/'/g, '"') // Convert single quotes to double
-      .replace(/"(\w+)"\s*:\s*undefined/g, '"$1": null') // Handle undefined
-      .replace(/,(\s*})/g, "$1"); // Remove trailing commas
-
-    shipping = JSON.parse(fixedJSON);
-  } catch (err) {
-    console.error("Error parsing shippingAddress:", err);
-  }
+  console.log("order",order )
+  
 
   return (
     <div className="max-w-6xl mx-auto p-6">
@@ -45,13 +35,15 @@ const OrderDetailPage = () => {
                 day: "numeric",
                 month: "short",
                 year: "numeric",
+                hour:"2-digit",
+                minute:"2-digit"
               })}
             </p>
           </div>
           <div>
-            <p className="text-gray-500">Current Status</p>
+            <p className="text-gray-500">Order Status</p>
             <span
-              className={`inline-block px-3 py-1 text-xs font-semibold rounded-full ${
+              className={`inline-block px-3 py-1 text-xm font-semibold rounded-full ${
                 order.status === "Delivered"
                   ? "bg-green-100 text-green-800"
                   : order.status === "Pending"
@@ -91,6 +83,12 @@ const OrderDetailPage = () => {
                 </p>
                 <p className="text-sm text-gray-600 mt-1">
                   Quantity: {item?.quantity}
+                </p>  
+                <p className="text-sm text-gray-600 mt-1">
+                  Size: {item?.size}
+                </p> 
+                <p className="text-sm text-gray-600 mt-1">
+                  Description: {item?.product?.description}
                 </p>
                 <p className="text-sm text-gray-600 mt-1">
                   Order ID:{" "}
@@ -109,18 +107,19 @@ const OrderDetailPage = () => {
           {/* Shipping Info */}
           <div>
             <h3 className="text-lg font-semibold mb-2">Shipping Information</h3>
-            <p className="font-medium">{shipping?.name || "N/A"}</p>
+            {/* <p className="font-medium">{order.shippingAddress || "N/A"}</p> */}
             <p className="text-sm text-gray-700 leading-6">
-              {shipping?.addressType || ""} {shipping?.apartment || ""}{" "}
-              {shipping?.street || ""}
-              <br />
-              {shipping?.city || ""}, {shipping?.state || ""} -{" "}
-              {shipping?.zip || ""}
-              <br />
-              {shipping?.country || ""}
-              <br />
-              <span className="font-semibold">Phone:</span>{" "}
-              {shipping?.phone || "N/A"}
+              <span className="font-semibold">OrderId :</span>{" "}
+              {order?.orderId || "N/A"} 
+              <br/><span className="font-semibold">Name :</span>{" "}
+              {order?.consigneename || "N/A"} 
+              <br/>
+              <span className="font-semibold">Phone :</span>{" "}
+              {order?.consigneephone || "N/A"}
+               <br/>
+              <span className="font-semibold">Address :</span>{" "}
+              {order.shippingAddress}
+              <br/>
             </p>
           </div>
 
