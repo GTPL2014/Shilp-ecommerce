@@ -298,7 +298,7 @@ const Home = () => {
           </div>
         ))}
       </div>
-      <section className="p-6 pt-2 my-3">
+      {/* <section className="p-6 pt-2 my-3">
         <div className="">
           <div className="row justify-content-center">
             <div className="col-12" >
@@ -315,7 +315,6 @@ const Home = () => {
                   justifyContent:"center"
                 }}
               >
-                {/* Background decorative elements */}
                 <div
                   className="position-absolute"
                   style={{
@@ -330,10 +329,9 @@ const Home = () => {
                 />
 
                 <div  style={{ cursor: 'pointer' }}  onClick={() => window.open("https://play.google.com/store/apps/details?id=com.swabhiman&hl=en", "_blank")} className="row align-items-center">
-                  {/* Left Content */}
                   <div className="col-lg-8 col-md-7 mb-2 mb-md-0">
                     <div className="d-flex align-items-center">
-                      {/* Badge */}
+                   
                       <span
                         className="badge px-2 py-1 me-3 mb-4"
                         style={{
@@ -347,7 +345,6 @@ const Home = () => {
                         📱 App
                       </span>
 
-                      {/* Main Content */}
                       <div className="flex-grow-1">
                         <h5
                           className="mb-1"
@@ -413,7 +410,7 @@ const Home = () => {
             }
           }
         `}</style>
-      </section>
+      </section> */}
       <style jsx>{`
         @keyframes fade-in-up {
           0% {
