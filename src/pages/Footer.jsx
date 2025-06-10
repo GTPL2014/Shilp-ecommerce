@@ -77,6 +77,20 @@ const Footer = () => {
             </li>
             <li>
               <a
+                href="/privacy-policy"
+                className="text-gray-600 hover:text-pink-600 transition-colors duration-200 cursor-pointer"
+              >
+                Privacy-Policy
+              </a>
+            </li><li>
+              <a
+                href="/term-and-condition"
+                className="text-gray-600 hover:text-pink-600 transition-colors duration-200 cursor-pointer"
+              >
+                Term & condition
+              </a>
+            </li><li>
+              <a
                 href="/shipping-and-delivery"
                 className="text-gray-600 hover:text-pink-600 transition-colors duration-200 cursor-pointer"
               >
