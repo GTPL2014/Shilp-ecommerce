@@ -21,10 +21,10 @@ const AddToCartButton = ({ data, selectedSize }) => {
   const handleADDTocart = async (e) => {
     e.preventDefault();
     e.stopPropagation();
-    if (selectedSize == "") {
-      toast.error("Please select a size before adding to cart.");
-      return;
-    }
+    // if (selectedSize == "") {
+    //   toast.error("Please select a size before adding to cart.");
+    //   return;
+    // }
     try {
       setLoading(true);
 
