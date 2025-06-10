@@ -33,7 +33,7 @@ const AddToCartButton = ({ data, selectedSize }) => {
         data: {
           productId: data?._id,
           userId: userId,
-          size:selectedSize
+          size: selectedSize ? selectedSize : "Free Size",
         },
       });
       const { data: responseData } = response;
