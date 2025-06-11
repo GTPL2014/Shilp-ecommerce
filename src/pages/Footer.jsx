@@ -120,7 +120,7 @@ const Footer = () => {
           </div>
           <h4 className="font-semibold mb-2">Contact Us</h4>
           <address className="text-sm not-italic leading-6">
-            Paridhan Sangrah Pvt. Ltd.
+            Cleveratti Skills Pvt. Ltd.
             <br />
             Email:{" "}
             <a
