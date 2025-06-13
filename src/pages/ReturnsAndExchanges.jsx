@@ -64,6 +64,8 @@ const ReturnsAndExchanges = () => {
         <ul className="list-disc pl-6 space-y-2">
           <li>Refunds will be issued to your original payment method or as store credit.</li>
           <li>Refunds are processed within <strong>5–7 business days</strong> after approval.</li>
+          <li>Once refund is approved the amount will be credit in <strong>7 to 10 working days.</strong></li>
+          <li>Damage, Defective and replacement product will be delivered in <strong> 5 to 7 working days.</strong></li>
         </ul>
       ),
     },

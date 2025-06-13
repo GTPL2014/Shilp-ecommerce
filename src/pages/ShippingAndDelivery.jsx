@@ -33,6 +33,9 @@ const ShippingAndDelivery = () => {
         <ul className="list-disc pl-5 space-y-2">
           <li>
             <strong>Free Shipping</strong> on all prepaid orders across India.
+          </li> 
+          <li>
+            <strong>All products will be delivered in </strong> 3 to 7 working days.
           </li>
           <li>
             <strong>Cash on Delivery (COD)</strong> may include an extra charge,
