@@ -298,7 +298,7 @@ const Home = () => {
           </div>
         ))}
       </div>
-      {/* <section className="p-6 pt-2 my-3">
+      <section className="p-6 pt-2 my-3">
         <div className="">
           <div className="row justify-content-center">
             <div className="col-12" >
@@ -410,7 +410,7 @@ const Home = () => {
             }
           }
         `}</style>
-      </section> */}
+      </section>
       <style jsx>{`
         @keyframes fade-in-up {
           0% {

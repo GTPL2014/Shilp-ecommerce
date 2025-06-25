@@ -41,6 +41,7 @@ const CheckoutPage = () => {
         userId: cartItemsList[0]?.userId, // assuming all items belong to the same user
         addressid: addressList[selectAddress]?._id,
         paymentMethod: "Cash on Delivery",
+        paymentby: "Cash on Delivery",
         paymentGatwayTransactionNo: "N/A",
         paymentGatwayTransactionStatus: "Pending",
         deliveryPartnerInstruction: [], // Or pass real instructions if available
@@ -66,35 +67,53 @@ const CheckoutPage = () => {
   };
 
   const handleOnlinePayment = async () => {
-    try {
-      toast.loading("Loading...");
-      const stripePublicKey = import.meta.env.VITE_STRIPE_PUBLIC_KEY;
-      const stripePromise = await loadStripe(stripePublicKey);
+  try {
+    toast.loading("Loading...");
 
-      const response = await Axios({
-        ...SummaryApi.payment_url,
-        data: {
-          list_items: cartItemsList,
-          addressId: addressList[selectAddress]?._id,
-          subTotalAmt: totalPrice,
-          totalAmt: totalPrice,
-        },
-      });
+    // Wait 2 seconds before showing the message
+    await new Promise((resolve) => setTimeout(resolve, 2000));
 
-      const { data: responseData } = response;
+    toast.dismiss(); // remove loading
+    toast.info("We are implementing payment gateway soon. You can place order via Cash on Delivery.");
 
-      stripePromise.redirectToCheckout({ sessionId: responseData.id });
+    // Optionally, you can also fallback to placing order with COD automatically
+    // placeOrderWithCOD();
+  } catch (error) {
+    toast.dismiss();
+    AxiosToastError(error);
+  }
+};
 
-      if (fetchCartItem) {
-        fetchCartItem();
-      }
-      if (fetchOrder) {
-        fetchOrder();
-      }
-    } catch (error) {
-      AxiosToastError(error);
-    }
-  };
+  // const handleOnlinePayment = async () => {
+  //   try {
+  //     toast.loading("Loading...");
+  //     const stripePublicKey = import.meta.env.VITE_STRIPE_PUBLIC_KEY;
+  //     const stripePromise = await loadStripe(stripePublicKey);
+
+  //     const response = await Axios({
+  //       ...SummaryApi.payment_url,
+  //       data: {
+  //         list_items: cartItemsList,
+  //         addressId: addressList[selectAddress]?._id,
+  //         subTotalAmt: totalPrice,
+  //         totalAmt: totalPrice,
+  //       },
+  //     });
+
+  //     const { data: responseData } = response;
+
+  //     stripePromise.redirectToCheckout({ sessionId: responseData.id });
+
+  //     if (fetchCartItem) {
+  //       fetchCartItem();
+  //     }
+  //     if (fetchOrder) {
+  //       fetchOrder();
+  //     }
+  //   } catch (error) {
+  //     AxiosToastError(error);
+  //   }
+  // };
   return (
     <section className="bg-blue-50">
       <div className="container mx-auto p-4 flex flex-col lg:flex-row w-full gap-5 justify-between">
