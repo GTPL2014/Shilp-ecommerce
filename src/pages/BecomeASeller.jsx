@@ -20,7 +20,7 @@ const BecomeASeller = () => {
       title: "Why Sell with Us?",
       content: (
         <p>
-          <strong>Paridhan Sangrah</strong> empowers fashion creators and businesses
+          <strong>Shilp Sangrah</strong> empowers fashion creators and businesses
           with a platform to showcase their passion and expand their reach. Whether you're
           a boutique owner, artisan, or designer — we help you shine.
         </p>
@@ -74,16 +74,16 @@ const BecomeASeller = () => {
         <p>
           📧 Email us at{" "}
           <a
-            href="mailto:sell@paridhansangrah.com"
+            href="mailto:sell@Shilpsangrah.com"
             className="text-pink-500 underline"
           >
-            sell@paridhansangrah.com
+            sell@Shilpsangrah.com
           </a>{" "}
           or WhatsApp us at <strong>+91-7428833683</strong> to begin.
           <br />
           Or visit our{" "}
           <a
-            href="https://admin.paridhansangrah.com/"
+            href="https://admin.Shilpsangrah.com/"
             className="text-pink-500 underline"
           >
             Seller Onboarding Page

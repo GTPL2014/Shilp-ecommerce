@@ -94,7 +94,7 @@ const ProductDisplayPage = () => {
           </div>
           <div>
             <p className="font-semibold">Customer Care Details</p>
-            <p className="text-base">Email: info@paridhansangrah.com</p>
+            <p className="text-base">Email: info@Shilpsangrah.com</p>
           </div>
           <div>
             <p className="font-semibold">Disclaimer</p>
@@ -182,7 +182,7 @@ const ProductDisplayPage = () => {
             <Star size={16} className="text-white-800 mr-1" />
           </span>
         </div>
-        <h2 className="font-semibold">Why shop from Paridhan Sangrah?</h2>
+        <h2 className="font-semibold">Why shop from Shilp Sangrah?</h2>
         {[image1, image2, image3].map((img, idx) => (
           <div className="flex items-center gap-4 my-4" key={idx}>
             <img src={img} className="w-20 h-20" alt="Reason" />

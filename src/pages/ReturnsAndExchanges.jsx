@@ -21,7 +21,7 @@ const ReturnsAndExchanges = () => {
       title: "Our Promise",
       content: (
         <p>
-          At <strong>Paridhan Sangrah</strong>, we aim to ensure you're satisfied with every purchase.
+          At <strong>Shilp Sangrah</strong>, we aim to ensure you're satisfied with every purchase.
           If something isn't right, our return and exchange process is simple and customer-friendly.
         </p>
       ),
@@ -73,7 +73,7 @@ const ReturnsAndExchanges = () => {
       title: "Need Help?",
       content: (
         <p>
-          Email us at <a href="mailto:support@paridhansangrah.com" className="text-pink-500 underline">support@paridhansangrah.com</a> or call us at <strong>+91-7428833683</strong>.<br />
+          Email us at <a href="mailto:support@Shilpsangrah.com" className="text-pink-500 underline">support@Shilpsangrah.com</a> or call us at <strong>+91-7428833683</strong>.<br />
           Our customer care is available Mon–Sat, 10 AM – 6 PM.
         </p>
       ),

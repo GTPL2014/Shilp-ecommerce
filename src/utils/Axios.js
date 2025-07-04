@@ -1,7 +1,7 @@
 import axios from "axios";
 import SummaryApi from "../common/SummaryApi";
 import { useSelector } from 'react-redux'
-const baseURL = "https://api.paridhansangrah.com/api/v1"
+const baseURL = "https://api.Shilpsangrah.com/api/v1"
 // const baseURL = "http://localhost:3000/api/v1"
 
 const Axios = axios.create({

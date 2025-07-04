@@ -49,7 +49,7 @@ const Careers = () => {
           transition={{ duration: 0.6 }}
           className="text-4xl font-bold"
         >
-          Careers at Paridhan Sangrah
+          Careers at Shilp Sangrah
         </motion.h1>
         <p className="mt-2 text-lg font-light">
           Join our vibrant team and help shape the future of fashion.
@@ -75,7 +75,7 @@ const Careers = () => {
               <p className="text-sm text-gray-600 mb-2">{job.location} · {job.type}</p>
               <p className="text-sm text-gray-700 mb-4">{job.description}</p>
               <a
-                href="mailto:careers@paridhansangrah.com?subject=Application for Job Opening"
+                href="mailto:careers@Shilpsangrah.com?subject=Application for Job Opening"
                 className="inline-block text-pink-600 hover:underline font-medium text-sm"
               >
                 Apply Now →
@@ -90,7 +90,7 @@ const Careers = () => {
             Don’t see a role that fits? We’d still love to hear from you.
           </p>
           <a
-            href="mailto:careers@paridhansangrah.com"
+            href="mailto:careers@Shilpsangrah.com"
             className="inline-block bg-pink-600 hover:bg-pink-700 text-white px-5 py-2 rounded-full transition"
           >
             Send Your Resume

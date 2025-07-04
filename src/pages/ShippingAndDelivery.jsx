@@ -21,7 +21,7 @@ const ShippingAndDelivery = () => {
       title: "Shipping Policy",
       content: (
         <p>
-          At <strong>Paridhan Sangrah</strong>, we aim to deliver your products
+          At <strong>Shilp Sangrah</strong>, we aim to deliver your products
           quickly and safely. We partner with trusted logistics providers to
           ensure your order reaches you on time.
         </p>
@@ -85,10 +85,10 @@ const ShippingAndDelivery = () => {
         <p>
           Email:{" "}
           <a
-            href="mailto:support@paridhansangrah.com"
+            href="mailto:support@Shilpsangrah.com"
             className="text-pink-500 underline"
           >
-            support@paridhansangrah.com
+            support@Shilpsangrah.com
           </a>
           <br />
           Phone: <strong>+91-7428833683</strong>

@@ -21,7 +21,7 @@ const TermsAndConditions = () => {
       title: "Introduction",
       content: (
         <p>
-          Welcome to <strong>Paridhan Sangrah</strong>. By accessing or using our website, you agree to be bound by these terms and conditions. Please read them carefully.
+          Welcome to <strong>Shilp Sangrah</strong>. By accessing or using our website, you agree to be bound by these terms and conditions. Please read them carefully.
         </p>
       ),
     },
@@ -31,7 +31,7 @@ const TermsAndConditions = () => {
         <ul className="list-disc pl-6 space-y-2">
           <li>You must provide accurate and complete information during registration or checkout.</li>
           <li>You agree not to misuse the site for any fraudulent or unlawful activity.</li>
-          <li>All content on the website is the property of Paridhan Sangrah and cannot be reused without permission.</li>
+          <li>All content on the website is the property of Shilp Sangrah and cannot be reused without permission.</li>
         </ul>
       ),
     },
@@ -48,7 +48,7 @@ const TermsAndConditions = () => {
       title: "Limitation of Liability",
       content: (
         <p>
-          Paridhan Sangrah is not liable for any damages arising from the use of our platform. We are not responsible for delays or failures due to unforeseen circumstances.
+          Shilp Sangrah is not liable for any damages arising from the use of our platform. We are not responsible for delays or failures due to unforeseen circumstances.
         </p>
       ),
     },

@@ -57,7 +57,7 @@ const PrivacyPolicy = () => {
       title: "Your Rights",
       content: (
         <p>
-          You may request access, correction, or deletion of your personal data by contacting us at <a href="mailto:support@paridhansangrah.com" className="text-pink-500 underline">support@paridhansangrah.com</a>.
+          You may request access, correction, or deletion of your personal data by contacting us at <a href="mailto:support@Shilpsangrah.com" className="text-pink-500 underline">support@Shilpsangrah.com</a>.
         </p>
       ),
     },

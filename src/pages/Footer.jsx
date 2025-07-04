@@ -13,7 +13,7 @@ const Footer = () => {
         {/* Shop Info */}
         <div className="md:col-span-2">
           <h3 className="text-xl font-semibold mb-2">
-            Shop Non-Stop on Paridhan Sangrah
+            Shop Non-Stop on Shilp Sangrah
           </h3>
           <p className="text-sm mb-2">Trusted by families across India</p>
           <p className="text-sm mb-4">
@@ -124,13 +124,13 @@ const Footer = () => {
             <br />
             Email:{" "}
             <a
-              href="mailto:support@paridhansangrah.com"
+              href="mailto:support@Shilpsangrah.com"
               className="text-blue-600"
             >
-              support@paridhansangrah.com
+              support@Shilpsangrah.com
             </a>
           </address>
-          <p className="text-xs text-gray-500 mt-2">© 2025 Paridhan Sangrah</p>
+          <p className="text-xs text-gray-500 mt-2">© 2025 Shilp Sangrah</p>
         </div>
       </div>
     </footer>

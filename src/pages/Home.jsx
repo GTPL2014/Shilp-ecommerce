@@ -357,7 +357,7 @@ const Home = () => {
                         >
                           Download{" "}
                           <span style={{ color: "#d97706" }}>
-                            Paridhan Sangrah
+                            Shilp Sangrah
                           </span>{" "}
                           App
                         </h5>
