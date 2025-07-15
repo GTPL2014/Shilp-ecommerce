@@ -47,4 +47,4 @@ jobs:
           ssh-keyscan -H $DEPLOY_SERVER >> ~/.ssh/known_hosts
 
           echo "Uploading build files to the server..."
-          scp -r ./build/* $DEPLOY_USER@$DEPLOY_SERVER:/var/www/Shilp-ecommerce/build
+          scp -r ./build/* $DEPLOY_USER@$DEPLOY_SERVER:/var/www/shilp-ecommerce/build
