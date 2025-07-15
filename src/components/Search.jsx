@@ -118,13 +118,13 @@ const Search = () => {
             >
               <TypeAnimation
                 sequence={[
-                  'Search "Women Ethnics"',
+                  'Search "Dupattas & Stoles"',
                   1000,
-                  'Search "Men Top Wear"',
+                  'Search "Wooden Furniture"',
                   1000,
-                  'Search "Women Sleepwear"',
+                  'Search "Terracotta Decor"',
                   1000,
-                  'Search "Kid Rompers"',
+                  'Search "Decorative Wall Panels"',
                   1000,
                 ]}
                 wrapper="span"
